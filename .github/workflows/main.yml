@@ -16,4 +16,4 @@ jobs:
 
       - name: Upload file to S3
         run: |
-          aws s3 cp ./Capture2.PNG s3://githubactionytdemotest/
+          aws s3 cp ./customer_data.csv s3://githubactionytdemotest/
