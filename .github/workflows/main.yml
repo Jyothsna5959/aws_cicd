@@ -38,10 +38,9 @@ jobs:
       run: |
         schemachange \
           -a $SF_ACCOUNT \
-          -u $SF_USER \
-          -p $SF_PASSWORD \
-          -r $SF_ROLE \
-          -w $SF_WAREHOUSE \
-          -d $SF_DATABASE \
-          -s $SF_SCHEMA \
-          --create-change-history-table
+            -u $SF_USERNAME \
+            -r $SF_ROLE \
+            -w $SF_WAREHOUSE \
+            -d $SF_DATABASE \
+            -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY \
+            --create-change-history-table
