@@ -1,19 +1,48 @@
-on: [push]
+name: Deploy CSV from S3 to Snowflake
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  aws_cp:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
 
-      - name: Upload file to S3
-        run: |
-          aws s3 cp ./claims_data.csv s3://datalake-dev-dtrai-rawlayer-in-com-sy/
+    - name: Install schemachange
+      run: |
+        pip install schemachange snowflake-connector-python
+
+    - name: Deploy to Snowflake
+      env:
+        SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+        SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+        SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+        SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+        SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      run: |
+        schemachange \
+          -f migrations \
+          -a $SNOWFLAKE_ACCOUNT \
+          -u $SNOWFLAKE_USER \
+          -p $SNOWFLAKE_PASSWORD \
+          -r $SNOWFLAKE_ROLE \
+          -w $SNOWFLAKE_WAREHOUSE \
+          -d $SNOWFLAKE_DATABASE \
+          -s $SNOWFLAKE_SCHEMA \
+          --create-change-history-table
