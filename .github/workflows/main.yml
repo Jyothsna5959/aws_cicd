@@ -1,0 +1,47 @@
+name: Deploy CSV from S3 to SF
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install schemachange
+      run: |
+        pip install schemachange snowflake-connector-python
+
+    - name: Deploy to SF
+      env:
+        SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+        SF_USER: ${{ secrets.SF_USER }}
+        SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
+        SF_ROLE: ${{ secrets.SF_ROLE }}
+        SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+        SF_DATABASE: ${{ secrets.SF_DATABASE }}
+        SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
+
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      run: |
+        schemachange \
+          -a $SF_ACCOUNT \
+          -u $SF_USER \
+          -p $SF_PASSWORD \
+          -r $SF_ROLE \
+          -w $SF_WAREHOUSE \
+          -d $SF_DATABASE \
+          -s $SF_SCHEMA \
+          --create-change-history-table
