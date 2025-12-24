@@ -33,7 +33,7 @@ jobs:
     #Upload JSON to S3
     - name: Upload JSON to S3
       run: |
-        aws s3 cp data/payments_data.json s3://datalake-dev-dtrai-rawlayer-in-com-sy/datareadyai/inbound/
+        aws s3 cp ./payment_data.json s3://datalake-dev-dtrai-rawlayer-in-com-sy/datareadyai/inbound/
 
     #Deploy to Snowflake
     - name: Deploy to SF
