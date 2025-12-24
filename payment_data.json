@@ -1,0 +1,38 @@
+[
+  {
+    "payment_id": 501,
+    "order_id": 9001,
+    "customer_name": "Arjun Mehta",
+    "payment_method": "Credit Card",
+    "payment_amount": 18999.99,
+    "payment_status": "SUCCESS",
+    "payment_date": "2024-11-20"
+  },
+  {
+    "payment_id": 502,
+    "order_id": 9002,
+    "customer_name": "Neha Verma",
+    "payment_method": "UPI",
+    "payment_amount": 2499.50,
+    "payment_status": "FAILED",
+    "payment_date": "2024-11-22"
+  },
+  {
+    "payment_id": 503,
+    "order_id": 9003,
+    "customer_name": "Karthik Rao",
+    "payment_method": "Net Banking",
+    "payment_amount": 7550.00,
+    "payment_status": "PENDING",
+    "payment_date": "2024-11-25"
+  },
+  {
+    "payment_id": 504,
+    "order_id": 9004,
+    "customer_name": "Divya Nair",
+    "payment_method": "Debit Card",
+    "payment_amount": 13200.75,
+    "payment_status": "SUCCESS",
+    "payment_date": "2024-11-28"
+  }
+]
