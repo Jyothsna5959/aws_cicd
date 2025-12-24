@@ -22,6 +22,20 @@ jobs:
       run: |
         pip install schemachange snowflake-connector-python
 
+    # ✅ Configure AWS Credentials
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    #Upload JSON to S3
+    - name: Upload JSON to S3
+      run: |
+        aws s3 cp data/payments_data.json s3://datalake-dev-dtrai-rawlayer-in-com-sy/datareadyai/inbound/
+
+    #Deploy to Snowflake
     - name: Deploy to SF
       env:
         SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
@@ -31,16 +45,12 @@ jobs:
         SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
         SF_DATABASE: ${{ secrets.SF_DATABASE }}
         SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
-
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
       run: |
         schemachange \
           -a $SF_ACCOUNT \
-            -u $SF_USER \
-            -r $SF_ROLE \
-            -w $SF_WAREHOUSE \
-            -d $SF_DATABASE \
-            -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY \
-            --create-change-history-table
+          -u $SF_USER \
+          -r $SF_ROLE \
+          -w $SF_WAREHOUSE \
+          -d $SF_DATABASE \
+          -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY \
+          --create-change-history-table
