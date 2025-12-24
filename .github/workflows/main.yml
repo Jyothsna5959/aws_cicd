@@ -38,7 +38,7 @@ jobs:
       run: |
         schemachange \
           -a $SF_ACCOUNT \
-            -u $SF_USERNAME \
+            -u $SF_USER \
             -r $SF_ROLE \
             -w $SF_WAREHOUSE \
             -d $SF_DATABASE \
