@@ -25,7 +25,7 @@ jobs:
     - name: Deploy to SF
       env:
         SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-        SF_USER: ${{ secrets.SF_USER }}
+        SF_USER: ${{ secrets.SF_USERNAME }}
         SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
         SF_ROLE: ${{ secrets.SF_ROLE }}
         SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
