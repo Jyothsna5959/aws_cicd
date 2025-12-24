@@ -26,7 +26,7 @@ jobs:
       env:
         SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
         SF_USER: ${{ secrets.SF_USERNAME }}
-        SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
+        SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
         SF_ROLE: ${{ secrets.SF_ROLE }}
         SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
         SF_DATABASE: ${{ secrets.SF_DATABASE }}
@@ -39,7 +39,6 @@ jobs:
         schemachange \
           -a $SF_ACCOUNT \
             -u $SF_USER \
-            -p "$SF_PASSWORD" \
             -r $SF_ROLE \
             -w $SF_WAREHOUSE \
             -d $SF_DATABASE \
