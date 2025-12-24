@@ -1,4 +1,4 @@
-create stage sql
+
 CREATE OR REPLACE STAGE DRAI_S3_STAGE
 URL = 's3://datalake-dev-dtrai-rawlayer-in-com-sy/datareadyai/inbound/claims_data.csv/'
 CREDENTIALS = (
