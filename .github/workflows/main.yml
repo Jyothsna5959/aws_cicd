@@ -39,6 +39,7 @@ jobs:
         schemachange \
           -a $SF_ACCOUNT \
             -u $SF_USER \
+            -p "$SF_PASSWORD" \
             -r $SF_ROLE \
             -w $SF_WAREHOUSE \
             -d $SF_DATABASE \
