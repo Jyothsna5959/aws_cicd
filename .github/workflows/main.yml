@@ -22,7 +22,6 @@ jobs:
       run: |
         pip install schemachange snowflake-connector-python
 
-    # ✅ Configure AWS Credentials
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
