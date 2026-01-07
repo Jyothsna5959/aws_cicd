@@ -1355,8 +1355,8 @@ $$;
 
 
 
-USE DATABASE AWS_SNF_CICD;
-USE SCHEMA DRAI_SNF_CICD;
+-- USE DATABASE AWS_SNF_CICD;
+-- USE SCHEMA DRAI_SNF_CICD;
 
 -- select * from ingestion_audit_log;
 -- drop table ingestion_audit_log;
