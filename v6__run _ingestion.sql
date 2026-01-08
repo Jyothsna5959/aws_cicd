@@ -3,7 +3,4 @@ USE SCHEMA DRAI_SNF_CICD;
 
 
 CALL LOAD_GENERIC_DATA_PROCEDURE('DRAI_INTERNAL_CONFIG_STAGE', 'sales_data_stg_schema.yaml');
--- CALL LOAD_GENERIC_DATA_PROCEDURE('DRAI_INTERNAL_CONFIG_STAGE', 'product_data_stg_schema.yaml');
--- CALL LOAD_GENERIC_DATA_PROCEDURE('DRAI_INTERNAL_CONFIG_STAGE', 'customer_details_stg_schema_json.yaml');
--- CALL LOAD_GENERIC_DATA_PROCEDURE('DRAI_INTERNAL_CONFIG_STAGE', 'product_details_stg_schema_parquet.yaml');
 
