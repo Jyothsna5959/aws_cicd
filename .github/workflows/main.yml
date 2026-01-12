@@ -32,11 +32,9 @@ jobs:
     #Upload JSON to S3
     - name: Upload JSON to S3
       run: |
-        aws s3 cp . s3://drai-cicd-snf/datareadyai/inbound/ \
-        --recursive \
-        --exclude "*" \
-        --include "*.json" \
-        --include "*.csv"
+       aws s3 sync . s3://drai-cicd-snf/datareadyai/inbound/ \
+        --exclude "*.sql"
+
       
     #Deploy to Snowflake
     - name: Deploy to SF
