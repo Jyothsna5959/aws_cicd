@@ -32,7 +32,7 @@ jobs:
     #Upload JSON to S3
     - name: Upload JSON to S3
       run: |
-       aws s3 cp sales_data.csv s3://my-sales-data-bucket/sales_data/
+       aws s3 cp sales_data.csv s3://drai-cicd-snf/datareadyai/inbound/sales_data/
 
 
       
