@@ -32,7 +32,10 @@ jobs:
     #Upload JSON to S3
     - name: Upload JSON to S3
       run: |
-       aws s3 sync . s3://drai-cicd-snf/datareadyai/inbound/ \
+       aws s3 sync ./inbound s3://drai-cicd-snf/datareadyai/inbound/ \
+       --exclude ".git/*" \
+       --exclude ".github/*" \
+       --exclude "*.md" \
         --exclude "*.sql"
 
       
